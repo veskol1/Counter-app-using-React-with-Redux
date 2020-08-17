@@ -29,7 +29,7 @@ class Counter extends Component {
 
     render () {
 
-        console.log("props"+this.props.ctr)
+        console.log("props="+this.props.res)
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
@@ -37,6 +37,13 @@ class Counter extends Component {
                 <CounterControl label="Decrement" clicked={this.props.onDec}  />
                 <CounterControl label="Add 5" clicked={this.props.onIncFive}  />
                 <CounterControl label="Subtract 5" clicked={this.props.onSubFive}  />
+                <hr/>
+                <button onClick={this.props.onStoreRes}>Store result</button>
+                    <ul>
+                        {this.props.resultsArr.map( res => {
+                            return <li>{res}</li>
+                        })}
+                    </ul>
             </div>
         );
     }
@@ -44,7 +51,8 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctr : state.counter
+        ctr : state.counter,
+        resultsArr : state.results
     }
 };
 
@@ -53,8 +61,9 @@ const mapDispatchToProps = dispatch => {
   return {
       onInc: () => dispatch({type: 'INCREMENT'}),
       onDec: () => dispatch({type: 'DECREMENT'}),
-      onIncFive: () => dispatch({type: 'INCFIVE', value: 5}),
-      onSubFive: () => dispatch({type: 'SUBFIVE', value: 5})
+      onIncFive: () => dispatch({type: 'INC_FIVE', value: 5}),
+      onSubFive: () => dispatch({type: 'SUB_FIVE', value: 5}),
+      onStoreRes: () => dispatch({type: 'STORE_RESULT'})
   };
 };
 
