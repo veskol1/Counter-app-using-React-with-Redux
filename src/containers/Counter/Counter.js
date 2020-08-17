@@ -41,7 +41,7 @@ class Counter extends Component {
                 <button onClick={this.props.onStoreRes}>Store result</button>
                     <ul>
                         {this.props.resultsArr.map( res => {
-                            return <li>{res}</li>
+                            return <li key={res.id} onClick={() => this.props.onDeleteRes(res.id)}> {res.value} </li>
                         })}
                     </ul>
             </div>
@@ -63,7 +63,8 @@ const mapDispatchToProps = dispatch => {
       onDec: () => dispatch({type: 'DECREMENT'}),
       onIncFive: () => dispatch({type: 'INC_FIVE', value: 5}),
       onSubFive: () => dispatch({type: 'SUB_FIVE', value: 5}),
-      onStoreRes: () => dispatch({type: 'STORE_RESULT'})
+      onStoreRes: () => dispatch({type: 'STORE_RESULT'}),
+      onDeleteRes: (id) => dispatch({type: 'DELETE_RESULT', deleteId: id})
   };
 };
 
